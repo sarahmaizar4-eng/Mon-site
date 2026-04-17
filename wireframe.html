@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wireframe - Sarah.M Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #1a1a2e;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #666;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 20px;
+    }
+
+    /* Wireframe card style */
+    .wireframe-page {
+      background: white;
+      border: 2px solid #999;
+      border-radius: 16px;
+      margin-bottom: 50px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .page-title {
+      background: #e0e0e0;
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+
+    /* Layout patterns */
+    .nav-wire {
+      background: #ddd;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .nav-item {
+      background: #bbb;
+      width: 90px;
+      height: 35px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    .two-columns {
+      display: flex;
+      gap: 40px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .image-placeholder {
+      background: #d9d9d9;
+      border: 2px dashed #888;
+      border-radius: 12px;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    .text-placeholder {
+      background: #e8e8e8;
+      height: 15px;
+      margin: 12px 0;
+      border-radius: 8px;
+    }
+
+    .text-placeholder.large {
+      height: 30px;
+      width: 80%;
+    }
+
+    .text-placeholder.medium {
+      width: 100%;
+    }
+
+    .text-placeholder.small {
+      width: 60%;
+    }
+
+    .title-placeholder {
+      background: #ccc;
+      height: 40px;
+      width: 70%;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    .card-placeholder {
+      background: #eee;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      height: 220px;
+    }
+
+    .skill-bar {
+      background: #ddd;
+      height: 10px;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+
+    .skill-bar.fill {
+      background: #aaa;
+      width: 70%;
+      height: 10px;
+      border-radius: 10px;
+    }
+
+    .contact-item {
+      background: #eee;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      height: 160px;
+    }
+
+    .chat-mock {
+      background: #eee;
+      border-radius: 20px;
+      padding: 20px;
+      height: 400px;
+    }
+
+    .chat-message {
+      background: #ddd;
+      border-radius: 18px;
+      padding: 12px 18px;
+      margin: 10px 0;
+      width: 70%;
+    }
+
+    .chat-message.user {
+      background: #bbb;
+      margin-left: auto;
+      width: 60%;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background: #e0e0e0;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+
+    .badge {
+      background: #1a1a2e;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    hr {
+      margin: 20px 0;
+      border: 1px dashed #ccc;
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 20px; }
+      .two-columns { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📐 Sarah.M Portfolio — Wireframe</h1>
+    <div class="subtitle">Low-fidelity layout structure | All pages schematics</div>
+
+    <!-- ==================== HOME PAGE ==================== -->
+    <div class="wireframe-page">
+      <div class="page-title">📄 PAGE 1 — HOME / ACCUEIL</div>
+      <div class="badge">Landing section</div>
+      
+      <!-- Navigation -->
+      <div class="nav-wire">
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+      </div>
+
+      <!-- Hero 2 columns -->
+      <div class="two-columns">
+        <div class="col">
+          <div class="text-placeholder large" style="width: 60%;"></div>
+          <div class="title-placeholder" style="width: 80%;"></div>
+          <div class="text-placeholder medium"></div>
+          <div class="text-placeholder medium"></div>
+          <div class="text-placeholder small"></div>
+          <div style="height: 15px;"></div>
+          <div class="text-placeholder" style="width: 40%; height: 45px;"></div>
+        </div>
+        <div class="col">
+          <div class="image-placeholder">
+            🖼️ Photo placeholder (silhouette / avatar)
+          </div>
+        </div>
+      </div>
+      <div class="footer-note" style="margin-top: 20px; background: #efefef;">
+        🔍 Elements: Hero title, CTA button, profile image placeholder, geometric decoration hints
+      </div>
+    </div>
+
+    <!-- ==================== ABOUT PAGE ==================== -->
+    <div class="wireframe-page">
+      <div class="page-title">📄 PAGE 2 — ABOUT / BIBLIOGRAPHY</div>
+      <div class="badge">Biography + stats</div>
+      
+      <div class="two-columns">
+        <div class="col">
+          <div class="image-placeholder" style="height: 220px;">
+            📸 Profile picture area
+          </div>
+          <div class="text-placeholder" style="width: 80%; margin-top: 15px;"></div>
+        </div>
+        <div class="col">
+          <div class="title-placeholder" style="width: 60%; height: 35px;"></div>
+          <div class="text-placeholder medium"></div>
+          <div class="text-placeholder medium"></div>
+          <div class="text-placeholder small"></div>
+          <div style="display: flex; gap: 30px; margin-top: 30px;">
+            <div><div class="text-placeholder" style="width: 50px; height: 35px;"></div><div class="text-placeholder small"></div></div>
+            <div><div class="text-placeholder" style="width: 50px; height: 35px;"></div><div class="text-placeholder small"></div></div>
+            <div><div class="text-placeholder" style="width: 50px; height: 35px;"></div><div class="text-placeholder small"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-note" style="margin-top: 20px;">
+        📝 Stats: 2+ years study, 4+ projects, 3+ technologies
+      </div>
+    </div>
+
+    <!-- ==================== PORTFOLIO PAGE ==================== -->
+    <div class="wireframe-page">
+      <div class="page-title">📄 PAGE 3 — PORTFOLIO / PROJECTS</div>
+      <div class="badge">Project cards grid</div>
+      
+      <div class="title-placeholder" style="width: 40%; margin: 0 auto 20px;"></div>
+      <div class="grid-4">
+        <div class="card-placeholder">
+          <div class="text-placeholder" style="width: 40%; height: 20px;"></div>
+          <div class="text-placeholder" style="width: 80%; height: 25px; margin-top: 15px;"></div>
+          <div class="text-placeholder medium"></div>
+          <div class="text-placeholder small"></div>
+          <div class="text-placeholder" style="width: 50%; margin-top: 20px;"></div>
+        </div>
+        <div class="card-placeholder">
+          <div class="text-placeholder" style="width: 40%; height: 20px;"></div>
+          <div class="text-placeholder" style="width: 80%; height: 25px; margin-top: 15px;"></div>
+          <div class="text-placeholder medium"></div>
+          <div class="text-placeholder small"></div>
+          <div class="text-placeholder" style="width: 50%; margin-top: 20px;"></div>
+        </div>
+        <div class="card-placeholder">
+          <div class="text-placeholder" style="width: 40%; height: 20px;"></div>
+          <div class="text-placeholder" style="width: 80%; height: 25px; margin-top: 15px;"></div>
+          <div class="text-placeholder medium"></div>
+          <div class="text-placeholder small"></div>
+          <div class="text-placeholder" style="width: 50%; margin-top: 20px;"></div>
+        </div>
+        <div class="card-placeholder">
+          <div class="text-placeholder" style="width: 40%; height: 20px;"></div>
+          <div class="text-placeholder" style="width: 80%; height: 25px; margin-top: 15px;"></div>
+          <div class="text-placeholder medium"></div>
+          <div class="text-placeholder small"></div>
+          <div class="text-placeholder" style="width: 50%; margin-top: 20px;"></div>
+        </div>
+      </div>
+      <div class="footer-note">
+        🃏 4 project cards with tags, title, description and "View Project" link
+      </div>
+    </div>
+
+    <!-- ==================== SKILLS PAGE ==================== -->
+    <div class="wireframe-page">
+      <div class="page-title">📄 PAGE 4 — SKILLS / TECHNICAL</div>
+      <div class="badge">Skill bars + hexagon cluster</div>
+      
+      <div class="two-columns">
+        <div class="col">
+          <div class="text-placeholder" style="width: 50%; height: 25px;"></div>
+          <div class="skill-bar"></div>
+          <div class="text-placeholder" style="width: 40%;"></div>
+          <div class="skill-bar"></div>
+          <div class="text-placeholder" style="width: 40%;"></div>
+          <div class="skill-bar"></div>
+          <div class="text-placeholder" style="width: 40%;"></div>
+          <div class="skill-bar"></div>
+          <div class="text-placeholder" style="width: 40%;"></div>
+          <div class="skill-bar"></div>
+        </div>
+        <div class="col">
+          <div class="image-placeholder" style="height: 250px;">
+            ⬡ Hexagon cluster diagram (HTML, JS, Python, Git, C++, CSS)
+          </div>
+        </div>
+      </div>
+      <div class="footer-note">
+        📊 Animated skill bars + interactive hexagon cluster (hover spin effect)
+      </div>
+    </div>
+
+    <!-- ==================== SERVICES PAGE ==================== -->
+    <div class="wireframe-page">
+      <div class="page-title">📄 PAGE 5 — SERVICES</div>
+      <div class="badge">Service cards</div>
+      
+      <div class="title-placeholder" style="width: 40%; margin: 0 auto;"></div>
+      <div class="grid-4">
+        <div class="contact-item" style="height: 180px;">
+          <div class="image-placeholder" style="height: 50px; width: 50px; border-radius: 50%; margin: 0 auto;"></div>
+          <div class="text-placeholder" style="width: 70%; margin: 15px auto;"></div>
+          <div class="text-placeholder small" style="width: 90%; margin: 0 auto;"></div>
+        </div>
+        <div class="contact-item" style="height: 180px;">
+          <div class="image-placeholder" style="height: 50px; width: 50px; border-radius: 50%; margin: 0 auto;"></div>
+          <div class="text-placeholder" style="width: 70%; margin: 15px auto;"></div>
+          <div class="text-placeholder small" style="width: 90%; margin: 0 auto;"></div>
+        </div>
+        <div class="contact-item" style="height: 180px;">
+          <div class="image-placeholder" style="height: 50px; width: 50px; border-radius: 50%; margin: 0 auto;"></div>
+          <div class="text-placeholder" style="width: 70%; margin: 15px auto;"></div>
+          <div class="text-placeholder small" style="width: 90%; margin: 0 auto;"></div>
+        </div>
+        <div class="contact-item" style="height: 180px;">
+          <div class="image-placeholder" style="height: 50px; width: 50px; border-radius: 50%; margin: 0 auto;"></div>
+          <div class="text-placeholder" style="width: 70%; margin: 15px auto;"></div>
+          <div class="text-placeholder small" style="width: 90%; margin: 0 auto;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== CONTACT PAGE ==================== -->
+    <div class="wireframe-page">
+      <div class="page-title">📄 PAGE 6 — CONTACT</div>
+      <div class="badge">Contact info + CTA</div>
+      
+      <div class="title-placeholder" style="width: 30%; margin: 0 auto;"></div>
+      <div class="grid-4" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="contact-item">
+          <div class="image-placeholder" style="height: 45px; width: 45px; border-radius: 50%; margin: 0 auto;"></div>
+          <div class="text-placeholder" style="width: 60%; margin: 10px auto;"></div>
+          <div class="text-placeholder small"></div>
+        </div>
+        <div class="contact-item">
+          <div class="image-placeholder" style="height: 45px; width: 45px; border-radius: 50%; margin: 0 auto;"></div>
+          <div class="text-placeholder" style="width: 60%; margin: 10px auto;"></div>
+          <div class="text-placeholder small"></div>
+        </div>
+        <div class="contact-item">
+          <div class="image-placeholder" style="height: 45px; width: 45px; border-radius: 50%; margin: 0 auto;"></div>
+          <div class="text-placeholder" style="width: 60%; margin: 10px auto;"></div>
+          <div class="text-placeholder small"></div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 30px;">
+        <div class="text-placeholder" style="width: 50%; margin: 0 auto; height: 50px;"></div>
+      </div>
+      <div class="footer-note">
+        📍 Address, email, phone — call to action button
+      </div>
+    </div>
+
+    <!-- ==================== CHATBOT PAGE ==================== -->
+    <div class="wireframe-page">
+      <div class="page-title">📄 PAGE 7 — CHATBOT ASSISTANT</div>
+      <div class="badge">Interactive Q&A interface</div>
+      
+      <div class="chat-mock">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div class="text-placeholder" style="width: 40%; margin: 0 auto;"></div>
+          <div class="text-placeholder small" style="width: 60%; margin: 8px auto;"></div>
+        </div>
+        <div class="chat-message">🤖 Bot: Welcome message placeholder</div>
+        <div class="chat-message user">👤 User question placeholder</div>
+        <div class="chat-message">🤖 Bot: Response placeholder</div>
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+          <div class="text-placeholder" style="flex: 1; height: 45px;"></div>
+          <div class="text-placeholder" style="width: 80px; height: 45px;"></div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px;">
+          <div class="text-placeholder" style="width: 100px;"></div>
+          <div class="text-placeholder" style="width: 120px;"></div>
+          <div class="text-placeholder" style="width: 140px;"></div>
+        </div>
+      </div>
+      <div class="footer-note">
+        💬 Suggestion chips, message bubbles, typing indicator
+      </div>
+    </div>
+
+    <!-- ==================== GLOBAL NAVIGATION ==================== -->
+    <div class="wireframe-page">
+      <div class="page-title">🧭 GLOBAL NAVIGATION</div>
+      <div class="badge">Fixed bottom hexagon menu</div>
+      
+      <div class="nav-wire" style="background: #ccc; justify-content: center; gap: 12px;">
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+      </div>
+      <div class="footer-note" style="margin-top: 15px;">
+        🔻 7 buttons: Home, About, Portfolio, Skills, Services, Contact, Chatbot — hexagon shapes, active state highlight
+      </div>
+    </div>
+
+    <!-- ==================== INTERACTIONS NOTE ==================== -->
+    <div class="wireframe-page">
+      <div class="page-title">⚙️ INTERACTIONS & ANIMATIONS</div>
+      <ul style="margin: 20px 0 0 25px; line-height: 1.8;">
+        <li>✅ Single Page Application (SPA) behavior — sections switch without reload</li>
+        <li>✅ Skill bars fill on view (CSS transition)</li>
+        <li>✅ Hexagon cluster rotates on hover (JavaScript animation)</li>
+        <li>✅ Keyboard navigation (Arrow Left/Right)</li>
+        <li>✅ Chatbot dynamic responses based on keywords</li>
+        <li>✅ Fade-up entrance animation on each section</li>
+        <li>✅ Active navigation state + URL hash update</li>
+      </ul>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding: 20px; background: #1a1a2e; color: white; border-radius: 16px;">
+      🎯 Wireframe version 1.0 — Sarah Maizar Said Portfolio | All structural components mapped
+    </div>
+  </div>
+</body>
+</html>
