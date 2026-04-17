@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarah.M — Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: #0b0b0f;
+      color: #f0ede6;
+      font-family: 'Syne', sans-serif;
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 18px 24px;
+      background: rgba(11, 11, 15, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: rgba(240, 237, 230, 0.6);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      transition: all 0.25s;
+    }
+    
+    nav a:hover,
+    nav a.active {
+      color: #c9a96e;
+      background: rgba(201, 169, 110, 0.15);
+    }
+    
+    /* Chat Container */
+    .chat-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 10vw 60px;
+    }
+    
+    .chat-wrapper {
+      width: 100%;
+      max-width: 900px;
+      background: #121217;
+      border: 1px solid rgba(201, 169, 110, 0.25);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .chat-header {
+      background: linear-gradient(135deg, #1a1a22, #121217);
+      padding: 28px 28px;
+      text-align: center;
+      border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+    }
+    
+    .chat-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #c9a96e;
+    }
+    
+    .chat-header p {
+      font-size: 0.85rem;
+      color: rgba(240, 237, 230, 0.6);
+      margin-top: 8px;
+    }
+    
+    /* Messages */
+    .chat-messages {
+      height: 420px;
+      overflow-y: auto;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: #0e0e12;
+    }
+    
+    .chat-messages::-webkit-scrollbar {
+      width: 5px;
+    }
+    
+    .chat-messages::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+    
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: #c9a96e;
+      border-radius: 10px;
+    }
+    
+    .message {
+      display: flex;
+      gap: 14px;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .message.user {
+      justify-content: flex-end;
+    }
+    
+    .message-avatar {
+      width: 36px;
+      height: 36px;
+      background: rgba(201, 169, 110, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .message.bot .message-avatar {
+      background: rgba(201, 169, 110, 0.25);
+    }
+    
+    .message-content {
+      max-width: 75%;
+      padding: 12px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    
+    .message.user .message-content {
+      background: #c9a96e;
+      color: #0b0b0f;
+      border-bottom-right-radius: 5px;
+      font-weight: 500;
+    }
+    
+    .message.bot .message-content {
+      background: #1e1e26;
+      border-bottom-left-radius: 5px;
+      color: #f0ede6;
+      border: 1px solid rgba(201, 169, 110, 0.15);
+    }
+    
+    /* Input Area */
+    .chat-input-area {
+      padding: 20px 28px;
+      border-top: 1px solid rgba(201, 169, 110, 0.12);
+      display: flex;
+      gap: 12px;
+      background: #121217;
+    }
+    
+    .chat-input {
+      flex: 1;
+      background: #1a1a22;
+      border: 1px solid rgba(201, 169, 110, 0.25);
+      border-radius: 40px;
+      padding: 14px 22px;
+      color: #f0ede6;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    
+    .chat-input:focus {
+      border-color: #c9a96e;
+      background: #22222c;
+    }
+    
+    .chat-input::placeholder {
+      color: rgba(240, 237, 230, 0.4);
+    }
+    
+    .send-btn {
+      background: #c9a96e;
+      border: none;
+      border-radius: 40px;
+      padding: 0 32px;
+      color: #0b0b0f;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    
+    .send-btn:hover {
+      background: #e0be84;
+      transform: translateY(-1px);
+    }
+    
+    /* Suggestions */
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px 28px 24px;
+      border-top: 1px solid rgba(201, 169, 110, 0.08);
+      background: #0e0e12;
+    }
+    
+    .suggestion-chip {
+      background: rgba(201, 169, 110, 0.12);
+      border: 1px solid rgba(201, 169, 110, 0.25);
+      border-radius: 30px;
+      padding: 8px 18px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: rgba(240, 237, 230, 0.8);
+      font-family: 'Syne', sans-serif;
+      font-weight: 500;
+    }
+    
+    .suggestion-chip:hover {
+      background: rgba(201, 169, 110, 0.3);
+      color: #c9a96e;
+      border-color: #c9a96e;
+      transform: translateY(-1px);
+    }
+    
+    /* Typing indicator */
+    .typing {
+      display: flex;
+      gap: 5px;
+      padding: 6px 0;
+    }
+    
+    .typing span {
+      width: 7px;
+      height: 7px;
+      background: rgba(201, 169, 110, 0.7);
+      border-radius: 50%;
+      animation: typingAnim 1.4s infinite;
+    }
+    
+    .typing span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .typing span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    @keyframes typingAnim {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+      }
+      30% {
+        transform: translateY(-8px);
+        opacity: 1;
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .chat-container {
+        padding: 90px 16px 40px;
+      }
+      .message-content {
+        max-width: 85%;
+        font-size: 0.85rem;
+      }
+      .chat-messages {
+        height: 380px;
+        padding: 16px;
+      }
+      .chat-input-area {
+        padding: 16px;
+      }
+      .suggestions {
+        padding: 12px 16px 20px;
+      }
+      nav a {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+      }
+      .chat-header h1 {
+        font-size: 1.5rem;
+      }
+      .send-btn {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="skills.html">Skills</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+    <a href="chatbot.html" class="active">🤖 Chat</a>
+  </nav>
+
+  <div class="chat-container">
+    <div class="chat-wrapper">
+      <div class="chat-header">
+        <h1>✨ Portfolio Assistant</h1>
+        <p>Ask me anything about Sarah Maizar Said</p>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot">
+          <div class="message-avatar">🤖</div>
+          <div class="message-content">
+            Hello! I'm Sarah's portfolio assistant. I can answer questions about:<br><br>
+            • Who Sarah is and her background<br>
+            • Her skills and expertise<br>
+            • Her projects and services<br>
+            • Contact information<br><br>
+            Feel free to ask me anything!
+          </div>
+        </div>
+      </div>
+
+      <div class="suggestions">
+        <div class="suggestion-chip" data-question="Who is Sarah?">👤 Who is Sarah?</div>
+        <div class="suggestion-chip" data-question="What are her skills?">⚡ What are her skills?</div>
+        <div class="suggestion-chip" data-question="Tell me about her projects">📁 Tell me about her projects</div>
+        <div class="suggestion-chip" data-question="What services does she offer?">🛠️ What services does she offer?</div>
+        <div class="suggestion-chip" data-question="How can I contact Sarah?">📧 How can I contact Sarah?</div>
+        <div class="suggestion-chip" data-question="What is her education?">🎓 What is her education?</div>
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Ask me something...">
+        <button class="send-btn" id="sendBtn">Send →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Données du portfolio
+    const portfolioData = {
+      name: "Sarah Maizar Said",
+      age: 19,
+      title: "Engineering Student specialized in Computer Science",
+      location: "Cité Nagad, Djibouti",
+      bio: "Sarah Maizar Said is a 19-year-old engineering student specialized in computer science. She combines careful technical work with creative ideas to build useful digital products.",
+      education: "Engineering student at Faculty of Engineering, specialized in Computer Science. 2+ years of study.",
+      skills: [
+        "HTML / CSS: 90%",
+        "JavaScript: 75%",
+        "Python: 92%",
+        "C / C++: 50%",
+        "Git / GitHub: 95%"
+      ],
+      projects: [
+        "Glino C++ - Web design project showcasing C++ integration",
+        "Project 2 - Embedded systems with custom firmware",
+        "Project 3 - Cross-platform mobile app for students",
+        "Project 4 - Machine learning for engineering datasets"
+      ],
+      services: [
+        "Web Development - Building responsive modern websites",
+        "UI / UX Design - Creating intuitive interfaces",
+        "Data Analysis - Extracting insights from datasets",
+        "Programming - Custom software development"
+      ],
+      contact: {
+        address: "Cité Nagad, Djibouti",
+        email: "Sarahmaizar4@gmail.com",
+        phone: "+253 77 04 91 81"
+      },
+      stats: {
+        yearsStudy: "2+",
+        projectsCount: "4+",
+        technologies: "3+"
+      }
+    };
+
+    // Fonction pour normaliser le texte
+    function normalizeText(text) {
+      return text.toLowerCase().trim().replace(/[?.,!;:]/g, '');
+    }
+
+    // Fonction pour vérifier si le texte contient des mots-clés
+    function containsAny(text, keywords) {
+      const normalized = normalizeText(text);
+      return keywords.some(keyword => normalized.includes(keyword.toLowerCase()));
+    }
+
+    // Fonction de réponse intelligente
+    function getResponse(question) {
+      const q = normalizeText(question);
+      
+      // Qui est Sarah ?
+      if (containsAny(q, ['who is sarah', 'tell me about sarah', 'introduce sarah', 'what is sarah', 'about sarah', 'sarah maizar', 'her name', 'background'])) {
+        return `👩‍💻 ${portfolioData.name} is a ${portfolioData.age}-year-old ${portfolioData.title}. ${portfolioData.bio}`;
+      }
+      
+      // Âge
+      if (containsAny(q, ['how old', 'age', 'years old'])) {
+        return `🎂 ${portfolioData.name} is ${portfolioData.age} years old.`;
+      }
+      
+      // Éducation
+      if (containsAny(q, ['education', 'study', 'studying', 'student', 'faculty', 'engineering student', 'learn', 'university'])) {
+        return `🎓 ${portfolioData.education}`;
+      }
+      
+      // Compétences
+      if (containsAny(q, ['skill', 'expertise', 'technologies', 'tech stack', 'know', 'proficient', 'can do', 'languages'])) {
+        const skillList = portfolioData.skills.map(s => `• ${s}`).join('\n');
+        return `⚡ Here are Sarah's skills:\n${skillList}\n\nShe's continuously improving and learning new technologies!`;
+      }
+      
+      // Compétences spécifiques
+      if (containsAny(q, ['html', 'css'])) {
+        return `🎨 Sarah's HTML/CSS skill level is 90%. She creates responsive and modern web designs.`;
+      }
+      if (containsAny(q, ['javascript', 'js'])) {
+        return `💻 JavaScript proficiency: 75%. Sarah builds interactive web applications.`;
+      }
+      if (containsAny(q, ['python'])) {
+        return `🐍 Python expertise: 92%. Strong in data analysis and backend development.`;
+      }
+      if (containsAny(q, ['c++', 'c plus plus', 'cpp'])) {
+        return `🔧 C/C++ knowledge: 50%. Currently advancing in system programming.`;
+      }
+      if (containsAny(q, ['git', 'github', 'version control'])) {
+        return `📦 Git/GitHub proficiency: 95%. Experienced with version control and collaborative development.`;
+      }
+      
+      // Projets
+      if (containsAny(q, ['project', 'portfolio', 'work', 'built', 'created', 'made', 'glino'])) {
+        const projectList = portfolioData.projects.map(p => `📌 ${p}`).join('\n');
+        return `📁 Sarah has ${portfolioData.stats.projectsCount} featured projects:\n${projectList}\n\nEach project demonstrates her technical and creative abilities.`;
+      }
+      
+      // Services
+      if (containsAny(q, ['service', 'offer', 'provide', 'do for you', 'help with', 'assist'])) {
+        const serviceList = portfolioData.services.map(s => `✨ ${s}`).join('\n');
+        return `🛠️ Sarah offers these services:\n${serviceList}\n\nContact her to discuss your project needs!`;
+      }
+      
+      // Contact
+      if (containsAny(q, ['contact', 'reach', 'email', 'mail', 'phone', 'call', 'whatsapp', 'address', 'location', 'find', 'get in touch'])) {
+        if (containsAny(q, ['email', 'mail'])) {
+          return `📧 You can email Sarah at: ${portfolioData.contact.email}`;
+        }
+        if (containsAny(q, ['phone', 'call', 'tel', 'number'])) {
+          return `📞 Sarah's phone number: ${portfolioData.contact.phone}`;
+        }
+        if (containsAny(q, ['address', 'location', 'where', 'city', 'djibouti', 'nagad'])) {
+          return `📍 Sarah is based in ${portfolioData.contact.address}`;
+        }
+        return `📬 You can contact Sarah via:\n• Email: ${portfolioData.contact.email}\n• Phone: ${portfolioData.contact.phone}\n• Address: ${portfolioData.contact.address}`;
+      }
+      
+      // Statistiques
+      if (containsAny(q, ['years', 'experience', 'how long', 'study years'])) {
+        return `📚 ${portfolioData.stats.yearsStudy} years of engineering study and growing experience in computer science.`;
+      }
+      if (containsAny(q, ['project count', 'how many projects', 'number of projects'])) {
+        return `📊 Sarah has completed ${portfolioData.stats.projectsCount} projects so far, with more in development.`;
+      }
+      
+      // Salutations
+      if (containsAny(q, ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon', 'bonjour'])) {
+        return `👋 Hello! I'm Sarah's portfolio assistant. How can I help you learn about Sarah today?`;
+      }
+      
+      // Remerciements
+      if (containsAny(q, ['thank', 'thanks', 'appreciate', 'helpful', 'merci'])) {
+        return `😊 You're very welcome! Feel free to ask if you have more questions about Sarah.`;
+      }
+      
+      // Réponse par défaut
+      return `🤔 I can only answer questions about Sarah Maizar Said's portfolio information.\n\nTry asking something like:\n• "Who is Sarah?"\n• "What are her skills?"\n• "Tell me about her projects"\n• "How can I contact her?"`;
+    }
+
+    // Éléments DOM
+    const messagesContainer = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    // Ajouter un message
+    function addMessage(content, isUser = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = isUser ? '👤' : '🤖';
+      
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'message-content';
+      contentDiv.innerHTML = content.replace(/\n/g, '<br>');
+      
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(contentDiv);
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Afficher l'indicateur de frappe
+    let typingIndicator = null;
+    
+    function showTyping() {
+      if (typingIndicator) return;
+      typingIndicator = document.createElement('div');
+      typingIndicator.className = 'message bot';
+      typingIndicator.id = 'typingIndicator';
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = '🤖';
+      
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'message-content';
+      contentDiv.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+      
+      typingIndicator.appendChild(avatar);
+      typingIndicator.appendChild(contentDiv);
+      
+      messagesContainer.appendChild(typingIndicator);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function hideTyping() {
+      if (typingIndicator) {
+        typingIndicator.remove();
+        typingIndicator = null;
+      }
+    }
+
+    // Envoyer un message
+    async function sendMessage(question) {
+      if (!question || !question.trim()) return;
+      
+      // Ajouter le message de l'utilisateur
+      addMessage(question, true);
+      chatInput.value = '';
+      
+      // Afficher l'indicateur de frappe
+      showTyping();
+      
+      // Attendre un peu (simulation de réflexion)
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Générer et ajouter la réponse
+      const response = getResponse(question);
+      hideTyping();
+      addMessage(response, false);
+    }
+
+    // Événements
+    sendBtn.addEventListener('click', () => {
+      sendMessage(chatInput.value);
+    });
+    
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendMessage(chatInput.value);
+      }
+    });
+    
+    // Suggestions
+    document.querySelectorAll('.suggestion-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const question = chip.getAttribute('data-question');
+        sendMessage(question);
+      });
+    });
+    
+    // Focus sur l'input
+    chatInput.focus();
+  </script>
+</body>
+</html>
