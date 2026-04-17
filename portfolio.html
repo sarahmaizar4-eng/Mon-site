@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarah.M — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#0b0b0f; --fg:#f0ede6; --accent:#c9a96e; --muted:rgba(240,237,230,0.45); --card:rgba(255,255,255,0.04); }
+    body { background: var(--bg); color: var(--fg); font-family: 'Syne', sans-serif; min-height: 100vh; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; gap: 8px; padding: 18px 24px; background: rgba(11,11,15,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,169,110,0.12); }
+    nav a { text-decoration: none; color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; transition: all 0.25s; }
+    nav a:hover, nav a.active { color: var(--accent); background: rgba(201,169,110,0.1); }
+
+    .page { min-height: 100vh; padding: 120px 10vw 80px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; text-align: center; }
+    .title-line { width: 60px; height: 2px; background: var(--accent); margin: 12px auto 50px; }
+
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .proj-card { background: var(--card); border: 1px solid rgba(201,169,110,0.12); border-radius: 8px; padding: 32px 28px; position: relative; overflow: hidden; opacity: 0; animation: fadeUp 0.7s var(--d, 0s) forwards; transition: border-color 0.25s, transform 0.25s; }
+    .proj-card:hover { border-color: rgba(201,169,110,0.4); transform: translateY(-4px); }
+    .proj-num { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 700; color: rgba(201,169,110,0.12); position: absolute; top: 12px; right: 20px; line-height: 1; }
+    .proj-tag { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); background: rgba(201,169,110,0.1); padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 16px; }
+    .proj-name { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 600; margin-bottom: 12px; }
+    .proj-desc { font-size: 0.9rem; line-height: 1.7; color: var(--muted); margin-bottom: 24px; }
+    .proj-link { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+    .proj-link:hover { opacity: 0.7; }
+
+    @keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: none; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html" class="active">Portfolio</a>
+    <a href="skills.html">Skills</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+    <a href="chatbot.html">🤖 Chat</a>
+  </nav>
+
+  <section class="page">
+    <h2 class="section-title">PROJECTS</h2>
+    <div class="title-line"></div>
+    <div class="proj-grid">
+
+      <article class="proj-card" style="--d:0s">
+        <div class="proj-num">01</div>
+        <span class="proj-tag">Web Design</span>
+        <h3 class="proj-name">Glino C++</h3>
+        <p class="proj-desc">A web design project showcasing C++ integration.</p>
+        <a href="#" class="proj-link">View Project →</a>
+      </article>
+
+      <article class="proj-card" style="--d:.1s">
+        <div class="proj-num">02</div>
+        <span class="proj-tag">Engineering</span>
+        <h3 class="proj-name">Project 2</h3>
+        <p class="proj-desc">Embedded systems project combining hardware design with custom firmware development.</p>
+        <a href="#" class="proj-link">View Project →</a>
+      </article>
+
+      <article class="proj-card" style="--d:.2s">
+        <div class="proj-num">03</div>
+        <span class="proj-tag">Mobile App</span>
+        <h3 class="proj-name">Project 3</h3>
+        <p class="proj-desc">Cross-platform mobile app for student schedule management and academic tracking.</p>
+        <a href="#" class="proj-link">View Project →</a>
+      </article>
+
+      <article class="proj-card" style="--d:.3s">
+        <div class="proj-num">04</div>
+        <span class="proj-tag">Data Science</span>
+        <h3 class="proj-name">Project 4</h3>
+        <p class="proj-desc">Machine learning model trained to classify and predict patterns in engineering datasets.</p>
+        <a href="#" class="proj-link">View Project →</a>
+      </article>
+
+    </div>
+  </section>
+</body>
+</html>
