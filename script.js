@@ -48,13 +48,15 @@
     });
   });
 
-  // Handle page load with hash
+  // Handle page load with hash - FORCER HOME si pas de hash valide
   const hash = window.location.hash.replace('#', '');
-  const validSections = ['home', 'about', 'portfolio', 'skills', 'services', 'contact'];
-  if (hash && validSections.includes(hash)) {
-    showSection(hash);
-  } else {
+  const validSections = ['home', 'about', 'portfolio', 'skills', 'services', 'contact', 'chatbot'];
+  
+  // Si le hash n'existe pas ou n'est pas valide, on force HOME
+  if (!hash || !validSections.includes(hash)) {
     showSection('home');
+  } else {
+    showSection(hash);
   }
 })();
 
@@ -102,7 +104,7 @@ window.addEventListener('hashchange', () => {
   const hash = window.location.hash.replace('#', '');
   const pages = document.querySelectorAll('.page');
   const hexBtns = document.querySelectorAll('.hex-btn');
-  const valid = ['home','about','portfolio','skills','services','contact'];
+  const valid = ['home','about','portfolio','skills','services','contact','chatbot'];
 
   if (valid.includes(hash)) {
     pages.forEach(p => p.classList.remove('active'));
@@ -174,7 +176,7 @@ window.addEventListener('hashchange', () => {
    7. KEYBOARD NAVIGATION (arrows)
    ------------------------------------------------ */
 (function initKeyNav() {
-  const order = ['home','about','portfolio','skills','services','contact'];
+  const order = ['home','about','portfolio','skills','services','contact','chatbot'];
 
   document.addEventListener('keydown', (e) => {
     const active = document.querySelector('.page.active');
@@ -211,6 +213,7 @@ window.addEventListener('hashchange', () => {
     skills:    'Skills — Sarah.M',
     services:  'Services — Sarah.M',
     contact:   'Contact — Sarah.M',
+    chatbot:   'Chat — Sarah.M',
   };
 
   const observer = new MutationObserver(() => {
@@ -221,4 +224,113 @@ window.addEventListener('hashchange', () => {
   document.querySelectorAll('.page').forEach(p =>
     observer.observe(p, { attributeFilter: ['class'] })
   );
+})();
+
+/* ------------------------------------------------
+   9. CHATBOT LOGIC
+   ------------------------------------------------ */
+(function initChatbot() {
+  const portfolioData = {
+    name: "Sarah Maizar Said", age: 19,
+    title: "Engineering Student specialized in Computer Science",
+    location: "Cité Nagad, Djibouti",
+    bio: "Sarah Maizar Said is a 19-year-old engineering student specialized in computer science. She combines careful technical work with creative ideas to build useful digital products.",
+    education: "Engineering student at Faculty of Engineering, specialized in Computer Science. 2+ years of study.",
+    skills: ["HTML / CSS: 90%","JavaScript: 75%","Python: 92%","C / C++: 50%","Git / GitHub: 95%"],
+    projects: ["Glino C++ - Web design project showcasing C++ integration","Project 2 - Embedded systems with custom firmware","Project 3 - Cross-platform mobile app for students","Project 4 - Machine learning for engineering datasets"],
+    services: ["Web Development - Building responsive modern websites","UI / UX Design - Creating intuitive interfaces","Data Analysis - Extracting insights from datasets","Programming - Custom software development"],
+    contact: { address: "Cité Nagad, Djibouti", email: "Sarahmaizar4@gmail.com", phone: "+253 77 04 91 81" },
+    stats: { yearsStudy: "2+", projectsCount: "4+", technologies: "3+" }
+  };
+
+  function normalizeText(text) { return text.toLowerCase().trim().replace(/[?.,!;:]/g, ''); }
+  function containsAny(text, keywords) {
+    const normalized = normalizeText(text);
+    return keywords.some(k => normalized.includes(k.toLowerCase()));
+  }
+
+  function getResponse(question) {
+    const q = normalizeText(question);
+    if (containsAny(q, ['who is sarah','tell me about sarah','about sarah','sarah maizar','her name','background'])) return `👩‍💻 ${portfolioData.name} is a ${portfolioData.age}-year-old ${portfolioData.title}. ${portfolioData.bio}`;
+    if (containsAny(q, ['how old','age','years old'])) return `🎂 ${portfolioData.name} is ${portfolioData.age} years old.`;
+    if (containsAny(q, ['education','study','studying','student','faculty','engineering student','university'])) return `🎓 ${portfolioData.education}`;
+    if (containsAny(q, ['skill','expertise','technologies','tech stack','know','languages'])) return `⚡ Here are Sarah's skills:\n${portfolioData.skills.map(s => '• ' + s).join('\n')}\n\nShe's continuously improving!`;
+    if (containsAny(q, ['html','css'])) return `🎨 Sarah's HTML/CSS skill level is 90%. She creates responsive and modern web designs.`;
+    if (containsAny(q, ['javascript','js'])) return `💻 JavaScript proficiency: 75%. Sarah builds interactive web applications.`;
+    if (containsAny(q, ['python'])) return `🐍 Python expertise: 92%. Strong in data analysis and backend development.`;
+    if (containsAny(q, ['c++','cpp'])) return `🔧 C/C++ knowledge: 50%. Currently advancing in system programming.`;
+    if (containsAny(q, ['git','github'])) return `📦 Git/GitHub proficiency: 95%. Experienced with version control.`;
+    if (containsAny(q, ['project','portfolio','work','built','glino'])) return `📁 Sarah has ${portfolioData.stats.projectsCount} featured projects:\n${portfolioData.projects.map(p => '📌 ' + p).join('\n')}`;
+    if (containsAny(q, ['service','offer','provide','assist'])) return `🛠️ Sarah offers these services:\n${portfolioData.services.map(s => '✨ ' + s).join('\n')}`;
+    if (containsAny(q, ['email','mail']) && containsAny(q, ['contact','reach','find'])) return `📧 Email Sarah at: ${portfolioData.contact.email}`;
+    if (containsAny(q, ['phone','call','number'])) return `📞 Sarah's phone number: ${portfolioData.contact.phone}`;
+    if (containsAny(q, ['contact','reach','find','get in touch'])) return `📬 Contact Sarah via:\n• Email: ${portfolioData.contact.email}\n• Phone: ${portfolioData.contact.phone}\n• Address: ${portfolioData.contact.address}`;
+    if (containsAny(q, ['hello','hi','hey','bonjour'])) return `👋 Hello! I'm Sarah's portfolio assistant. How can I help you?`;
+    if (containsAny(q, ['thank','thanks','merci'])) return `😊 You're very welcome! Feel free to ask more questions about Sarah.`;
+    return `🤔 I can answer questions about Sarah's portfolio.\n\nTry asking:\n• "Who is Sarah?"\n• "What are her skills?"\n• "Tell me about her projects"\n• "How can I contact her?"`;
+  }
+
+  // Wait until chatbot section is in DOM (may be added later)
+  function setupChatbot() {
+    const messagesContainer = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    if (!messagesContainer || !chatInput || !sendBtn) return;
+
+    let typingEl = null;
+
+    function addMessage(content, isUser) {
+      const div = document.createElement('div');
+      div.className = 'message ' + (isUser ? 'user' : 'bot');
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = isUser ? '👤' : '🤖';
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'message-content';
+      contentDiv.innerHTML = content.replace(/\n/g, '<br>');
+      div.appendChild(avatar);
+      div.appendChild(contentDiv);
+      messagesContainer.appendChild(div);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function showTyping() {
+      if (typingEl) return;
+      typingEl = document.createElement('div');
+      typingEl.className = 'message bot';
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = '🤖';
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'message-content';
+      contentDiv.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+      typingEl.appendChild(avatar);
+      typingEl.appendChild(contentDiv);
+      messagesContainer.appendChild(typingEl);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function hideTyping() {
+      if (typingEl) { typingEl.remove(); typingEl = null; }
+    }
+
+    async function sendMessage(question) {
+      if (!question || !question.trim()) return;
+      addMessage(question, true);
+      chatInput.value = '';
+      showTyping();
+      await new Promise(r => setTimeout(r, 500));
+      hideTyping();
+      addMessage(getResponse(question), false);
+    }
+
+    sendBtn.addEventListener('click', () => sendMessage(chatInput.value));
+    chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(chatInput.value); });
+    document.querySelectorAll('.suggestion-chip').forEach(chip => {
+      chip.addEventListener('click', () => sendMessage(chip.getAttribute('data-question')));
+    });
+  }
+
+  // Run setup on page load
+  setupChatbot();
 })();
