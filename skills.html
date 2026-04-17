@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarah.M — Skills</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#0b0b0f; --fg:#f0ede6; --accent:#c9a96e; --muted:rgba(240,237,230,0.45); --card:rgba(255,255,255,0.04); }
+    body { background: var(--bg); color: var(--fg); font-family: 'Syne', sans-serif; min-height: 100vh; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; gap: 8px; padding: 18px 24px; background: rgba(11,11,15,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,169,110,0.12); }
+    nav a { text-decoration: none; color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; transition: all 0.25s; }
+    nav a:hover, nav a.active { color: var(--accent); background: rgba(201,169,110,0.1); }
+
+    .page { min-height: 100vh; display: flex; align-items: center; padding: 120px 10vw 80px; }
+    .page-inner { width: 100%; }
+
+    .skills-header { text-align: center; margin-bottom: 60px; }
+    .skills-oval { display: inline-block; background: var(--accent); color: #0b0b0f; padding: 14px 48px; border-radius: 100px; }
+    .skills-oval h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; }
+
+    .skills-layout { display: flex; gap: 80px; align-items: center; }
+    .skills-bars { flex: 1; display: flex; flex-direction: column; gap: 28px; }
+    .skill-item { opacity: 0; animation: fadeUp 0.6s var(--d, 0s) forwards; }
+    .skill-meta { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .skill-name { font-size: 0.85rem; color: var(--fg); }
+    .skill-pct { font-size: 0.82rem; color: var(--accent); font-weight: 700; }
+    .skill-track { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+    .skill-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #e0be84); border-radius: 3px; width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+    .hex-cluster { flex: 0 0 260px; position: relative; height: 260px; }
+    .hx { position: absolute; display: flex; align-items: center; justify-content: center; width: 72px; height: 72px; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; transition: transform 0.25s; }
+    .hx:hover { transform: scale(1.1); }
+    .hx-c { background: var(--accent); color: #0b0b0f; font-size: 1.5rem; top: 94px; left: 94px; width: 80px; height: 80px; }
+    .hx-1 { background: rgba(201,169,110,0.15); color: var(--fg); top: 0; left: 94px; }
+    .hx-2 { background: rgba(201,169,110,0.15); color: var(--fg); top: 56px; left: 172px; }
+    .hx-3 { background: rgba(201,169,110,0.15); color: var(--fg); top: 168px; left: 172px; }
+    .hx-4 { background: rgba(201,169,110,0.15); color: var(--fg); top: 192px; left: 94px; }
+    .hx-5 { background: rgba(201,169,110,0.15); color: var(--fg); top: 168px; left: 16px; }
+    .hx-6 { background: rgba(201,169,110,0.15); color: var(--fg); top: 56px; left: 16px; }
+
+    @keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: none; } }
+    @media (max-width: 700px) { .skills-layout { flex-direction: column; } .hex-cluster { display: none; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="skills.html" class="active">Skills</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+    <a href="chatbot.html">🤖 Chat</a>
+  </nav>
+
+  <section class="page">
+    <div class="page-inner">
+      <div class="skills-header">
+        <div class="skills-oval"><h2>Skills</h2></div>
+      </div>
+      <div class="skills-layout">
+        <div class="skills-bars">
+
+          <div class="skill-item" style="--d:0.1s">
+            <div class="skill-meta">
+              <span class="skill-name"><b>Skill 1:</b> HTML / CSS</span>
+              <span class="skill-pct">90%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-w="90"></div></div>
+          </div>
+
+          <div class="skill-item" style="--d:0.2s">
+            <div class="skill-meta">
+              <span class="skill-name"><b>Skill 2:</b> JavaScript</span>
+              <span class="skill-pct">75%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-w="75"></div></div>
+          </div>
+
+          <div class="skill-item" style="--d:0.3s">
+            <div class="skill-meta">
+              <span class="skill-name"><b>Skill 3:</b> Python</span>
+              <span class="skill-pct">92%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-w="80"></div></div>
+          </div>
+
+          <div class="skill-item" style="--d:0.4s">
+            <div class="skill-meta">
+              <span class="skill-name"><b>Skill 4:</b> C / C++</span>
+              <span class="skill-pct">50%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-w="65"></div></div>
+          </div>
+
+          <div class="skill-item" style="--d:0.5s">
+            <div class="skill-meta">
+              <span class="skill-name"><b>Skill 5:</b> Git / GitHub</span>
+              <span class="skill-pct">95%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-w="85"></div></div>
+          </div>
+
+        </div>
+        <div class="hex-cluster">
+          <div class="hx hx-c">💡</div>
+          <div class="hx hx-1">HTML</div>
+          <div class="hx hx-2">JS</div>
+          <div class="hx hx-3">Python</div>
+          <div class="hx hx-4">Git</div>
+          <div class="hx hx-5">C++</div>
+          <div class="hx hx-6">CSS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelectorAll('.skill-fill').forEach(el => {
+          el.style.width = el.dataset.w + '%';
+        });
+      }, 400);
+    });
+  </script>
+</body>
+</html>
