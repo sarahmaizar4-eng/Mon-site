@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarah.M — About</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#0b0b0f; --fg:#f0ede6; --accent:#c9a96e; --muted:rgba(240,237,230,0.45); --card:rgba(255,255,255,0.04); }
+    body { background: var(--bg); color: var(--fg); font-family: 'Syne', sans-serif; min-height: 100vh; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; gap: 8px; padding: 18px 24px; background: rgba(11,11,15,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,169,110,0.12); }
+    nav a { text-decoration: none; color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; transition: all 0.25s; }
+    nav a:hover, nav a.active { color: var(--accent); background: rgba(201,169,110,0.1); }
+
+    .page { min-height: 100vh; display: flex; align-items: center; padding: 120px 10vw 60px; }
+    .about-layout { display: flex; gap: 80px; align-items: center; width: 100%; }
+    .about-left { flex: 0 0 auto; opacity: 0; animation: fadeUp 0.8s 0.1s forwards; }
+    .about-photo-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+    .about-photo { width: 220px; height: 270px; background: var(--card); border: 1px solid rgba(201,169,110,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; }
+    .silhouette { width: 65%; opacity: 0.6; }
+    .img-label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .name-badge { background: var(--accent); color: #0b0b0f; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; padding: 8px 20px; border-radius: 4px; text-align: center; }
+
+    .about-right { flex: 1; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 12px; }
+    .title-line { width: 60px; height: 2px; background: var(--accent); margin-bottom: 28px; }
+    .body-text { font-size: 1rem; line-height: 1.8; color: var(--muted); margin-bottom: 20px; }
+    .stats-row { display: flex; gap: 40px; margin-top: 36px; }
+    .stat { display: flex; flex-direction: column; gap: 4px; }
+    .stat-n { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .stat-l { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    @keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: none; } }
+    @media (max-width: 700px) { .about-layout { flex-direction: column; gap: 40px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="skills.html">Skills</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+    <a href="chatbot.html">🤖 Chat</a>
+  </nav>
+
+  <section class="page">
+    <div class="about-layout">
+      <div class="about-left">
+        <div class="about-photo-wrap">
+          <div class="about-photo">
+            <svg class="silhouette" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="80" cy="60" rx="38" ry="42" fill="rgba(255,255,255,0.14)"/>
+              <ellipse cx="80" cy="162" rx="65" ry="40" fill="rgba(255,255,255,0.08)"/>
+            </svg>
+            <span class="img-label">image</span>
+          </div>
+          <div class="name-badge">Sarah Maizar Said</div>
+        </div>
+      </div>
+      <div class="about-right">
+        <h2 class="section-title">Bibliography</h2>
+        <div class="title-line"></div>
+        <p class="body-text">My name is Sarah Maizar Said. I am a 19 years old engineering student specialised in computer science.</p>
+        <p class="body-text">I combine careful technical work with creative ideas to build useful digital products. Each project helps me learn and try new things.</p>
+        <div class="stats-row">
+          <div class="stat"><span class="stat-n">2+</span><span class="stat-l">Years Study</span></div>
+          <div class="stat"><span class="stat-n">4+</span><span class="stat-l">Projects</span></div>
+          <div class="stat"><span class="stat-n">3+</span><span class="stat-l">Technologies</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
